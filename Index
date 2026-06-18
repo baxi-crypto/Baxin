@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>baxi – Survey · Mine · Ads · Games · Earn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        body {
+            background: #0D0D0D;
+            color: #FFFFFF;
+            padding: 18px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0 20px;
+            border-bottom: 2px solid #424242;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .logo {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #FF9800;
+        }
+        .logo i { color: #1E88E5; margin-right: 6px; }
+        .logo span { color: #FFFFFF; }
+        .header-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn {
+            padding: 10px 28px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #424242;
+            color: #FFFFFF;
+        }
+        .btn-outline:hover { border-color: #FF9800; background: #1A1A1A; }
+        .btn-primary {
+            background: #FF9800;
+            color: #0D0D0D;
+        }
+        .btn-primary:hover { background: #F57C00; transform: scale(1.04); }
+        .btn-blue {
+            background: #1E88E5;
+            color: #FFFFFF;
+        }
+        .btn-blue:hover { background: #1565C0; transform: scale(1.04); }
+        .btn-success {
+            background: #4CAF50;
+            color: #FFFFFF;
+        }
+        .btn-success:hover { background: #388E3C; transform: scale(1.04); }
+        .hero {
+            background: linear-gradient(145deg, #1A1A1A, #0D0D0D);
+            border: 1px solid #424242;
+            border-radius: 32px;
+            padding: 48px 36px;
+            margin: 32px 0;
+            text-align: center;
+        }
+        .hero h1 { font-size: 3rem; font-weight: 900; }
+        .hero h1 .orange { color: #FF9800; }
+        .hero h1 .blue { color: #1E88E5; }
+        .hero p {
+            color: #BDBDBD;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 16px auto 28px;
+            line-height: 1.6;
+        }
+        .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 20px 0 30px;
+        }
+        .stat-box {
+            background: #1A1A1A;
+            border: 1px solid #424242;
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+        }
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #FF9800;
+        }
+        .stat-box .number.blue { color: #1E88E5; }
+        .stat-box .label {
+            color: #757575;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+        .card {
+            background: #1A1A1A;
+            border-radius: 28px;
+            padding: 30px 24px;
+            border: 1px solid #424242;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF9800, #1E88E5);
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .card:hover { border-color: #FF9800; transform: translateY(-6px); }
+        .card:hover::before { opacity: 1; }
+        .card i {
+            font-size: 2.6rem;
+            color: #FF9800;
+            margin-bottom: 14px;
+        }
+        .card h3 { font-size: 1.5rem; margin-bottom: 8px; }
+        .card p { color: #BDBDBD; line-height: 1.6; font-size: 0.95rem; }
+        .card .badge {
+            display: inline-block;
+            margin-top: 16px;
+            background: #2A2A2A;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #FF9800;
+            font-weight: 700;
+            border: 1px solid #424242;
+        }
+        .card .badge-blue { color: #1E88E5; }
+        .mining-section {
+            background: linear-gradient(145deg, #1A1A1A, #0D0D0D);
+            border: 1px solid #424242;
+            border-radius: 32px;
+            padding: 32px 30px;
+            margin: 30px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        .mining-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .stat i {
+            font-size: 2rem;
+            color: #FF9800;
+        }
+        .stat .blue-icon { color: #1E88E5; }
+        .stat .value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #FFFFFF;
+        }
+        .stat .label {
+            color: #757575;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .mine-btn {
+            background: #FF9800;
+            border: none;
+            color: #0D0D0D;
+            font-size: 1.3rem;
+            font-weight: 800;
+            padding: 16px 44px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 0 30px rgba(255, 152, 0, 0.25);
+        }
+        .mine-btn:hover { background: #F57C00; transform: scale(1.05); }
+        .mine-btn:active { transform: scale(0.94); }
+        .ad-banner {
+            background: #1A1A1A;
+            border: 1px solid #424242;
+            border-radius: 20px;
+            padding: 20px 24px;
+            text-align: center;
+            margin: 20px 0;
+            color: #BDBDBD;
+            font-weight: 600;
+        }
+        .ad-banner i { color: #FF9800; margin-right: 10px; }
+        .ad-banner .highlight { color: #1E88E5; }
+        .ad-banner .cta { color: #FF9800; font-weight: 800; }
+        .game-box {
+            background: #1A1A1A;
+            border: 1px solid #424242;
+            border-radius: 28px;
+            padding: 28px 24px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .game-box h3 { font-size: 1.8rem; margin-bottom: 6px; }
+        .game-box h3 i { color: #FF9800; }
+        .game-box .sub { color: #757575; margin-bottom: 20px; }
+        .game-box iframe {
+            width: 100%;
+            max-width: 720px;
+            height: 420px;
+            border-radius: 20px;
+            border: 2px solid #424242;
+            background: #0D0D0D;
+        }
+        .referral-section {
+            background: #1A1A1A;
+            border: 1px solid #424242;
+            border-radius: 28px;
+            padding: 28px 30px;
+            margin: 30px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .referral-section .ref-link {
+            background: #0D0D0D;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid #424242;
+            color: #FF9800;
+            font-weight: 600;
+            flex: 1;
+            min-width: 200px;
+            word-break: break-all;
+        }
+        .copy-btn {
+            background: #1E88E5;
+            border: none;
+            color: #FFFFFF;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .copy-btn:hover { background: #1565C0; }
+        .withdraw-section {
+            background: #1A1A1A;
+            border: 1px solid #424242;
+            border-radius: 28px;
+            padding: 28px 30px;
+            margin: 30px 0;
+        }
+        .withdraw-section .payment-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+            padding: 16px;
+            background: #0D0D0D;
+            border-radius: 16px;
+            border: 1px solid #424242;
+        }
+        .payment-info .method {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #BDBDBD;
+            font-size: 0.9rem;
+        }
+        .payment-info .method i { font-size: 1.4rem; }
+        .payment-info .method .orange { color: #FF9800; }
+        .payment-info .method .blue { color: #1E88E5; }
+        .payment-info .method .green { color: #4CAF50; }
+        .payment-info .method .detail {
+            color: #FFFFFF;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .withdraw-form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 16px;
+        }
+        .withdraw-form select,
+        .withdraw-form input {
+            background: #0D0D0D;
+            border: 1px solid #424242;
+            color: #FFFFFF;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 150px;
+        }
+        .withdraw-form select option { background: #1A1A1A; }
+        .survey-overlay {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1A1A1A;
+            border: 1px solid #424242;
+            border-radius: 28px;
+            padding: 24px 28px;
+            max-width: 340px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+            z-index: 999;
+            backdrop-filter: blur(6px);
+        }
+        .survey-overlay .close {
+            float: right;
+            background: none;
+            border: none;
+            color: #757575;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+        .survey-overlay .close:hover { color: #FFFFFF; }
+        .survey-overlay h4 { font-size: 1.2rem; margin: 6px 0 10px; }
+        .survey-overlay h4 i { color: #FF9800; }
+        .survey-overlay .stars {
+            display: flex;
+            gap: 10px;
+            font-size: 2rem;
+            margin: 14px 0 16px;
+            justify-content: center;
+        }
+        .survey-overlay .stars i {
+            cursor: pointer;
+            color: #424242;
+            transition: 0.15s;
+        }
+        .survey-overlay .stars i.active,
+        .survey-overlay .stars i:hover { color: #FF9800; }
+        .survey-overlay .submit-survey {
+            background: #FF9800;
+            border: none;
+            padding: 10px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #0D0D0D;
+            font-size: 1rem;
+            width: 100%;
+        }
+        .survey-overlay .submit-survey:hover { background: #F57C00; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #1A1A1A;
+            border: 1px solid #424242;
+            border-radius: 32px;
+            padding: 40px;
+            max-width: 420px;
+            width: 90%;
+        }
+        .modal-content h2 { margin-bottom: 20px; }
+        .modal-content input {
+            width: 100%;
+            padding: 14px 18px;
+            margin: 10px 0;
+            background: #0D0D0D;
+            border: 1px solid #424242;
+            border-radius: 50px;
+            color: #FFFFFF;
+            font-size: 1rem;
+        }
+        .modal-content input:focus {
+            border-color: #FF9800;
+            outline: none;
+        }
+        .modal-content .btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .modal-close {
+            float: right;
+            background: none;
+            border: none;
+            color: #757575;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+        .modal-close:hover { color: #FFFFFF; }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1A1A1A;
+            border: 1px solid #FF9800;
+            border-radius: 16px;
+            padding: 16px 24px;
+            color: #FFFFFF;
+            z-index: 2000;
+            transform: translateX(120%);
+            transition: 0.4s;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.success { border-color: #4CAF50; }
+        .toast.error { border-color: #f44336; }
+        .toast .toast-title { font-weight: 700; font-size: 1.1rem; }
+        .toast .toast-body { color: #BDBDBD; font-size: 0.9rem; margin-top: 4px; }
+        .footer {
+            margin-top: 50px;
+            padding-top: 24px;
+            border-top: 2px solid #424242;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            color: #757575;
+            font-size: 0.9rem;
+        }
+        .footer .social i {
+            font-size: 1.4rem;
+            margin-left: 14px;
+            color: #757575;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .footer .social i:hover { color: #FF9800; }
+        @media (max-width: 700px) {
+            .header { flex-direction: column; align-items: stretch; text-align: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .mining-stats { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .mining-section { flex-direction: column; align-items: stretch; }
+            .mine-btn { width: 100%; justify-content: center; }
+            .survey-overlay { right: 10px; left: 10px; max-width: unset; bottom: 10px; }
+            .referral-section { flex-direction: column; }
+            .withdraw-form { flex-direction: column; }
+            .withdraw-form select,
+            .withdraw-form input { width: 100%; }
+            .payment-info { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div class="toast-title" id="toastTitle">✅ Success</div>
+        <div class="toast-body" id="toastBody">Your action was completed.</div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo"><i class="fas fa-cubes"></i>baxi<span>.</span></div>
+        <div class="header-actions">
+            <button class="btn btn-outline" id="loginBtn"><i class="fas fa-user"></i> Login</button>
+            <button class="btn btn-primary" id="signupBtn"><i class="fas fa-user-plus"></i> Sign Up</button>
+            <button class="btn btn-blue" id="leaderboardBtn"><i class="fas fa-trophy"></i> Leaderboard</button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1><span class="orange">Survey</span> · <span class="blue">Mine</span> · <span class="orange">Ads</span> · <span class="blue">Games</span></h1>
+        <p>Earn baxi tokens by completing surveys, mining, watching ads, and playing games. Withdraw via Mobile Money or Crypto.</p>
+        <div class="hero-btns">
+            <button class="btn btn-primary" id="startMiningHero"><i class="fas fa-play"></i> Start Mining</button>
+            <button class="btn btn-outline" id="withdrawHero"><i class="fas fa-wallet"></i> Withdraw</button>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stat-box"><div class="number" id="totalUsers">1,247</div><div class="label">Total Users</div></div>
+        <div class="stat-box"><div class="number blue" id="totalMined">8.42</div><div class="label">BAXI Mined</div></div>
+        <div class="stat-box"><div class="number" id="onlineNow">89</div><div class="label">Online Now</div></div>
+        <div class="stat-box"><div class="number blue" id="btcPrice">$67,482</div><div class="label">BTC Price</div></div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="grid">
+        <div class="card">
+            <i class="fas fa-poll"></i>
+            <h3>Surveys</h3>
+            <p>Share your opinion and earn. New surveys added every hour.</p>
+            <span class="badge"><i class="far fa-clock"></i> 5 available</span>
+        </div>
+        <div class="card">
+            <i class="fas fa-microchip" style="color:#1E88E5;"></i>
+            <h3>Mining</h3>
+            <p>Mine baxi tokens with your CPU/GPU. Passive income 24/7.</p>
+            <span class="badge badge-blue"><i class="fas fa-bolt"></i> 2.4 TH/s</span>
+        </div>
+        <div class="card">
+            <i class="fas fa-ad"></i>
+            <h3>Ads</h3>
+            <p>Watch or run ads. Transparent, high-yield ad ecosystem.</p>
+            <span class="badge"><i class="fas fa-chart-line"></i> +18% ROI</span>
+        </div>
+        <div class="card">
+            <i class="fas fa-gamepad" style="color:#1E88E5;"></i>
+            <h3>Games</h3>
+            <p>Compete in arcade & strategy games. Win tokens daily.</p>
+            <span class="badge badge-blue"><i class="fas fa-trophy"></i> 4 active</span>
+        </div>
+    </div>
+
+    <!-- MINING -->
+    <div class="mining-section" id="miningSection">
+        <div class="mining-stats">
+            <div class="stat">
+                <i class="fas fa-coins"></i>
+                <div>
+                    <div class="value" id="miningBalance">0.000</div>
+                    <div class="label">BAXI mined</div>
+                </div>
+            </div>
+            <div class="stat">
+                <i class="fas fa-tachometer-alt blue-icon"></i>
+                <div>
+                    <div class="value" id="hashRate">0.00</div>
+                    <div class="label">MH/s</div>
+                </div>
+            </div>
+            <div class="stat">
+                <i class="fas fa-users" style="color:#1E88E5;"></i>
+                <div>
+                    <div class="value" id="minersOnline">127</div>
+                    <div class="label">Miners online</div>
+                </div>
+            </div>
+        </div>
+        <button class="mine-btn" id="mineBtn"><i class="fas fa-hammer"></i> MINE NOW</button>
+    </div>
+
+    <!-- AD -->
+    <div class="ad-banner">
+        <i class="fas fa-bullhorn"></i>
+        <span class="highlight">SPONSORED:</span> Reach 15k+ daily miners & gamers.
+        <span class="cta">Advertise here →</span>
+    </div>
+
+    <!-- GAME -->
+    <div class="game-box">
+        <h3><i class="fas fa-dice-d6"></i> baxi Clicker</h3>
+        <p class="sub">Click the button. Earn points. Top scores win bonus tokens.</p>
+        <iframe srcdoc="
+            <!DOCTYPE html>
+            <html>
+            <head><style>
+                body { background:#0D0D0D; display:flex; align-items:center; justify-content:center; height:100%; margin:0; font-family:'Segoe UI',sans-serif; flex-direction:column; color:white; }
+                .score-label { color:#757575; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; }
+                .score-number { font-size:4rem; font-weight:900; color:#FF9800; margin:8px 0; }
+                .game-btn { background:#FF9800; border:none; padding:22px 50px; border-radius:60px; font-size:1.8rem; font-weight:800; color:#0D0D0D; cursor:pointer; transition:0.08s; box-shadow:0 0 40px rgba(255,152,0,0.2); margin:12px 0; }
+                .game-btn:active { transform:scale(0.92); }
+                .game-btn:hover { background:#F57C00; }
+                .hint { color:#424242; font-size:0.8rem; margin-top:12px; }
+                .reset-btn { background:transparent; border:1px solid #424242; color:#757575; padding:6px 20px; border-radius:30px; cursor:pointer; font-size:0.8rem; margin-top:10px; }
+                .reset-btn:hover { border-color:#FF9800; color:#FF9800; }
+            </style></head>
+            <body>
+                <div class='score-label'>Your Score</div>
+                <div class='score-number' id='scoreDisplay'>0</div>
+                <button class='game-btn' id='clickBtn'>🪙 CLICK</button>
+                <button class='reset-btn' id='resetBtn'>↻ Reset</button>
+                <div class='hint'>+1 point per click</div>
+                <script>
+                    let score = 0;
+                    const display = document.getElementById('scoreDisplay');
+                    document.getElementById('clickBtn').onclick = () => {
+                        score++;
+                        display.textContent = score;
+                        if (score % 10 === 0) { display.style.color = '#1E88E5'; setTimeout(() => display.style.color = '#FF9800', 200); }
+                    };
+                    document.getElementById('resetBtn').onclick = () => { score = 0; display.textContent = '0'; display.style.color = '#FF9800'; };
+                </script>
+            </body>
+            </html>
+        "></iframe>
+    </div>
+
+    <!-- AD 2 -->
+    <div class="ad-banner">
+        <i class="fas fa-gem"></i>
+        <span class="highlight">PREMIUM SLOT:</span> Only 3 spots left this month.
+        <span class="cta">Claim 30% off →</span>
+    </div>
+
+    <!-- REFERRAL -->
+    <div class="referral-section">
+        <div>
+            <h4><i class="fas fa-link" style="color:#FF9800;"></i> Refer & Earn</h4>
+            <p style="color:#757575; font-size:0.9rem;">Share your link. Earn 10% of what your referrals mine.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; flex:1;">
+            <div class="ref-link" id="referralLink">https://baxi.com/ref/your-username</div>
+            <button class="copy-btn" id="copyRefBtn"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+    </div>
+
+    <!-- ===== WITHDRAW SECTION - YOUR NAME HIDDEN ===== -->
+    <div class="withdraw-section" id="withdrawSection">
+        <h4><i class="fas fa-wallet" style="color:#1E88E5;"></i> Withdraw & Get Paid</h4>
+        <p style="color:#757575; font-size:0.9rem;">Minimum 0.5 BAXI. Paid within 24 hours.</p>
+        
+        <!-- PAYMENT DETAILS - ONLY PHONE NUMBERS, NO NAME -->
+        <div class="payment-info">
+            <div class="method">
+                <i class="fas fa-phone orange"></i>
+                <div>
+                    <div style="color:#757575; font-size:0.7rem;">Mobile Money</div>
+                    <div class="detail">+256 755226797</div>
+                    <div class="detail">+256 764397702</div>
+                </div>
+            </div>
+            <div class="method">
+                <i class="fab fa-google-pay blue"></i>
+                <div>
+                    <div style="color:#757575; font-size:0.7rem;">Google Pay</div>
+                    <div class="detail">+256 755226797</div>
+                </div>
+            </div>
+            <div class="method">
+                <i class="fab fa-bitcoin green"></i>
+                <div>
+                    <div style="color:#757575; font-size:0.7rem;">Bitcoin / Crypto</div>
+                    <div class="detail">+256 755226797</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WITHDRAW FORM -->
+        <div class="withdraw-form">
+            <select id="withdrawMethod">
+                <option value="mobile1">📱 Mobile Money (+256 755226797)</option>
+                <option value="mobile2">📱 Mobile Money (+256 764397702)</option>
+                <option value="googlepay">💳 Google Pay (+256 755226797)</option>
+                <option value="bitcoin">₿ Bitcoin (+256 755226797)</option>
+            </select>
+            <input type="text" placeholder="Your email, phone, or wallet address" id="withdrawAddress">
+            <button class="btn btn-success" id="withdrawBtn"><i class="fas fa-paper-plane"></i> Withdraw</button>
+        </div>
+    </div>
+
+    <!-- SURVEY POPUP -->
+    <div class="survey-overlay" id="surveyPopup">
+        <button class="close" id="closeSurvey"><i class="fas fa-times"></i></button>
+        <h4><i class="fas fa-star"></i> Quick Survey</h4>
+        <p style="color:#BDBDBD; font-size:0.9rem;">Rate baxi today (1–5 stars)</p>
+        <div class="stars" id="starContainer">
+            <i class="fas fa-star" data-val="1"></i>
+            <i class="fas fa-star" data-val="2"></i>
+            <i class="fas fa-star" data-val="3"></i>
+            <i class="fas fa-star" data-val="4"></i>
+            <i class="fas fa-star" data-val="5"></i>
+        </div>
+        <button class="submit-survey" id="submitSurvey">Submit & Earn 0.05 BAXI</button>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+            <h2 id="authTitle">Login</h2>
+            <input type="text" placeholder="Username" id="authUsername">
+            <input type="password" placeholder="Password" id="authPassword">
+            <button class="btn btn-primary" id="authSubmitBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <p style="color:#757575; margin-top:16px; text-align:center; font-size:0.9rem;" id="authToggle">Don't have an account? <span style="color:#FF9800;cursor:pointer;" id="switchToSignup">Sign up</span></p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <span>© 2026 <strong style="color:#FF9800;">baxi</strong> — Survey · Mine · Ads · Games</span>
+        <div class="social">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-discord"></i>
+            <i class="fab fa-telegram"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // Toast notification
+        function showToast(title, body, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastBody').textContent = body;
+            toast.className = 'toast ' + type;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 5000);
+        }
+
+        // Mining
+        let balance = 0;
+        const balanceEl = document.getElementById('miningBalance');
+        const hashEl = document.getElementById('hashRate');
+        document.getElementById('mineBtn').addEventListener('click', function() {
+            const earned = parseFloat((Math.random() * 0.08 + 0.02).toFixed(3));
+            balance += earned;
+            balanceEl.textContent = balance.toFixed(3);
+            hashEl.textContent = (Math.random() * 1.5 + 0.3).toFixed(2);
+            this.style.transform = 'scale(0.92)';
+            setTimeout(() => { this.style.transform = ''; }, 120);
+        });
+        setInterval(() => {
+            balance += parseFloat((Math.random() * 0.015 + 0.003).toFixed(3));
+            balanceEl.textContent = balance.toFixed(3);
+            hashEl.textContent = (Math.random() * 0.6 + 0.4).toFixed(2);
+        }, 3000);
+
+        // Survey
+        const stars = document.querySelectorAll('#starContainer i');
+        let selectedRating = 0;
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const val = parseInt(this.dataset.val);
+                selectedRating = val;
+                stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.val) <= val));
+            });
+            star.addEventListener('mouseenter', function() {
+                const val = parseInt(this.dataset.val);
+                stars.forEach(s => s.style.color = (parseInt(s.dataset.val) <= val) ? '#FF9800' : '#424242');
+            });
+            star.addEventListener('mouseleave', function() {
+                stars.forEach(s => s.style.color = s.classList.contains('active') ? '#FF9800' : '#424242');
+            });
+        });
+        document.getElementById('submitSurvey').addEventListener('click', function() {
+            if (selectedRating === 0) { showToast('⭐ Rating Required', 'Select 1–5 stars.', 'error'); return; }
+            balance += 0.05;
+            balanceEl.textContent = balance.toFixed(3);
+            showToast('✅ Survey Complete!', 'You earned 0.05 BAXI!', 'success');
+            document.getElementById('surveyPopup').style.display = 'none';
+        });
+        document.getElementById('closeSurvey').addEventListener('click', () => {
+            document.getElementById('surveyPopup').style.display = 'none';
+        });
+
+        // Referral
+        document.getElementById('copyRefBtn').addEventListener('click', function() {
+            const link = document.getElementById('referralLink').textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                showToast('📋 Copied!', 'Referral link copied.', 'success');
+                setTimeout(() => { this.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+            }).catch(() => alert('Copy: ' + link));
+        });
+
+        // ===== WITHDRAWAL - USER SENDS MONEY TO YOUR PHONE =====
+        document.getElementById('withdrawBtn').addEventListener('click', function() {
+            const method = document.getElementById('withdrawMethod').value;
+            const address = document.getElementById('withdrawAddress').value.trim();
+            
+            if (!address) {
+                showToast('❌ Missing Address', 'Enter your payment address.', 'error');
+                return;
+            }
+            if (balance < 0.5) {
+                showToast('❌ Insufficient Balance', 'Minimum 0.5 BAXI. You have ' + balance.toFixed(3), 'error');
+                return;
+            }
+
+            const methodNames = {
+                'mobile1': 'Mobile Money (+256 755226797)',
+                'mobile2': 'Mobile Money (+256 764397702)',
+                'googlepay': 'Google Pay (+256 755226797)',
+                'bitcoin': 'Bitcoin (+256 755226797)'
+            };
+
+            // Show user where to send payment (YOUR PHONE NUMBERS)
+            showToast('📲 Send Payment', 
+                'Send ' + balance.toFixed(3) + ' BAXI equivalent to:\n' +
+                '📱 +256 755226797\n' +
+                '📱 +256 764397702\n\n' +
+                'Then email: byaruhangajordan214@gmail.com', 'success');
+
+            // Open email to YOU with withdrawal request (YOUR EMAIL - hidden from users)
+            const adminMessage = '💰 NEW WITHDRAWAL REQUEST!\n' +
+                'Amount: ' + balance.toFixed(3) + ' BAXI\n' +
+                'Method: ' + methodNames[method] + '\n' +
+                'User Address: ' + address;
+
+            const gmailLink = 'https://mail.google.com/mail/?view=cm&fs=1&to=byaruhangajordan214@gmail.com&su=BAXI%20WITHDRAWAL&body=' + 
+                encodeURIComponent(adminMessage);
+            
+            window.open(gmailLink, '_blank');
+            
+            // Reset balance
+            balance = 0;
+            balanceEl.textContent = '0.000';
+            document.getElementById('withdrawAddress').value = '';
+
+            console.log('===== BAXI WITHDRAWAL =====');
+            console.log(adminMessage);
+            console.log('=============================');
+        });
+
+        // Scroll to withdraw
+        document.getElementById('withdrawHero').addEventListener('click', () => {
+            document.getElementById('withdrawSection').scrollIntoView({ behavior: 'smooth' });
+        });
+        document.getElementById('startMiningHero').addEventListener('click', () => {
+            document.getElementById('miningSection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Auth
+        const modal = document.getElementById('authModal');
+        let isLogin = true;
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            isLogin = true;
+            document.getElementById('authTitle').textContent = 'Login';
+            document.getElementById('authSubmitBtn').innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+            document.getElementById('authToggle').innerHTML = "Don't have an account? <span style='color:#FF9800;cursor:pointer;' id='switchToSignup'>Sign up</span>";
+            modal.classList.add('active');
+            document.getElementById('switchToSignup').addEventListener('click', function() {
+                isLogin = false;
+                document.getElementById('authTitle').textContent = 'Sign Up';
+                document.getElementById('authSubmitBtn').innerHTML = '<i class="fas fa-user-plus"></i> Sign Up';
+                document.getElementById('authToggle').innerHTML = "Already have an account? <span style='color:#FF9800;cursor:pointer;' id='switchToLogin'>Login</span>";
+                document.getElementById('switchToLogin').addEventListener('click', function() {
+                    document.getElementById('loginBtn').click();
+                });
+            });
+        });
+        document.getElementById('signupBtn').addEventListener('click', () => {
+            document.getElementById('loginBtn').click();
+        });
+        document.getElementById('closeModal').addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+        document.getElementById('authSubmitBtn').addEventListener('click', function() {
+            const username = document.getElementById('authUsername').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
+            if (!username || !password) {
+                showToast('❌ Required', 'Enter username and password.', 'error');
+                return;
+            }
+            showToast('✅ Welcome ' + username + '!', isLogin ? 'Login successful!' : 'Account created!', 'success');
+            modal.classList.remove('active');
+            document.getElementById('authUsername').value = '';
+            document.getElementById('authPassword').value = '';
+            localStorage.setItem('baxiUser', username);
+        });
+
+        // Leaderboard
+        document.getElementById('leaderboardBtn').addEventListener('click', function() {
+            const topUsers = [
+                { name: 'CryptoKing', score: 245.7 },
+                { name: 'MinerPro', score: 189.3 },
+                { name: 'SurveyMaster', score: 156.8 },
+                { name: 'GameChamp', score: 134.2 },
+                { name: 'TokenHunter', score: 112.5 }
+            ];
+            let message = '🏆 BAXI LEADERBOARD 🏆\n\n';
+            topUsers.forEach((user, index) => {
+                message += (index + 1) + '. ' + user.name + ' — ' + user.score.toFixed(1) + ' BAXI\n';
+            });
+            alert(message);
+        });
+
+        // Live stats
+        setInterval(() => {
+            const users = parseInt(document.getElementById('totalUsers').textContent.replace(/,/g, ''));
+            document.getElementById('totalUsers').textContent = (users + Math.floor(Math.random() * 3)).toLocaleString();
+            document.getElementById('onlineNow').textContent = Math.floor(Math.random() * 60 + 40);
+            document.getElementById('minersOnline').textContent = Math.floor(Math.random() * 50 + 100);
+            const totalMined = parseFloat(document.getElementById('totalMined').textContent);
+            document.getElementById('totalMined').textContent = (totalMined + Math.random() * 0.05).toFixed(2);
+        }, 5000);
+        setInterval(() => {
+            document.getElementById('btcPrice').textContent = '$' + (67000 + Math.floor(Math.random() * 1000)).toLocaleString();
+        }, 10000);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'm' || e.key === 'M') document.getElementById('mineBtn').click();
+            if (e.key === 'w' || e.key === 'W') document.getElementById('withdrawSection').scrollIntoView({ behavior: 'smooth' });
+            if (e.key === 's' || e.key === 'S') document.getElementById('surveyPopup').style.display = 'block';
+        });
+
+        console.log('🔥 BAXI FULLY LOADED');
+        console.log('📱 Admin Phone: +256 755226797');
+        console.log('📧 Admin Email: byaruhangajordan214@gmail.com');
+
+        setTimeout(() => {
+            showToast('🚀 Welcome to baxi!', 'Start mining and earning real money.', 'success');
+        }, 1000);
+    })();
+</script>
+</body>
+</html>
